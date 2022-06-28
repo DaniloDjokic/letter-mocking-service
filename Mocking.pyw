@@ -1,4 +1,5 @@
 import keyboard, mocking_flow as mf
+from global_hotkeys import *
 
 mocking_flow = mf.MockingFlow()
 
@@ -7,8 +8,17 @@ def waitForHotkey(hotkey):
     keyboard.wait(hotkey)
     return True
 
-    
-while(waitForHotkey('ctrl+shift+alt+o')):
-   mocking_flow.startMocking()
+def onHotkey():
+    mocking_flow.startMocking()
+
+bindings = [
+    [["control", "shift", "alt", "o"], None,  onHotkey]
+]
+
+register_hotkeys(bindings)
+start_checking_hotkeys()
+
+keyboard.wait()
+
 
         
