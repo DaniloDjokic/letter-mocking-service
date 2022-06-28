@@ -1,18 +1,20 @@
 import keyboard, mocking_flow as mf
+import configuration_handler as ch
 from global_hotkeys import *
 
 mocking_flow = mf.MockingFlow()
+configuration_handler = ch.ConfigurationHandler()
 
-def waitForHotkey(hotkey):
-    print("Starting")
-    keyboard.wait(hotkey)
-    return True
+print("App started")
 
 def onHotkey():
+    print("Mocking started")
     mocking_flow.startMocking()
 
+hotkeyCollection = configuration_handler.readDefaultHotkey()
+
 bindings = [
-    [["control", "shift", "alt", "o"], None,  onHotkey]
+    [hotkeyCollection, None,  onHotkey]
 ]
 
 register_hotkeys(bindings)
